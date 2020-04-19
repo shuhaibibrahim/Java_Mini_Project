@@ -9,10 +9,15 @@ import java.awt.event.*;
 import java.io.*;
 import java.awt.Dimension;
 import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.*;
 
 public class work extends JFrame
 {
-    JPanel topPanel=new JPanel();
+    
+    BufferedImage img = null;
+
+    String approvedFlag="";
 
     ResultSet rs,rs1;
     JButton view;
@@ -32,9 +37,22 @@ public class work extends JFrame
     JLabel rlabel=new JLabel();
     public work(String rname,String supname)
     {
-        topPanel.setBounds(0,0,500,45);
-        topPanel.setBackground(Color.DARK_GRAY);
-        add(topPanel);
+            
+        try 
+        {
+            img = ImageIO.read(new File("tick1.png"));
+        } 
+        catch (IOException e) 
+        {
+            System.out.println(e);
+        }
+        Image dimg = img.getScaledInstance(15, 15,Image.SCALE_SMOOTH);
+        ImageIcon imgicon = new ImageIcon(dimg);
+
+        JPanel topPanel=new JPanel();
+
+        JButton approve=new JButton("Approve Researcher");
+        JLabel approveLabel=new JLabel("Approved",imgicon,JLabel.CENTER);
 
         rlabel.setText("Reseacher Username : "+rname);
         try
@@ -63,6 +81,25 @@ public class work extends JFrame
         } 
         scrollPane=new JScrollPane(wtable);
         view=new JButton("View File");
+
+        
+        try
+        {
+            PreparedStatement stm=con.prepareStatement("select AdvisorApproved from researcher where uname=?");
+            stm.setString(1,rname);
+            rs=stm.executeQuery();
+            rs.next();
+            approvedFlag=rs.getString(1);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }        
+        //Setting position of approve button and approve label initially
+        approve.setBounds(390,50,210,25);
+        approveLabel.setBounds(500,50,100,25);
+        approveLabel.setForeground(Color.blue);
+
         view.addActionListener
         (
             new ActionListener()
@@ -116,8 +153,6 @@ public class work extends JFrame
                 }
             }
         );
-        logout.setBounds(400,10,90,25);
-        add(logout);
 
         //back button
         back.addActionListener(
@@ -130,8 +165,48 @@ public class work extends JFrame
                 }
             }
         );
+
+        approve.addActionListener(
+            new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e1)
+                {
+                    try
+                    {
+                        PreparedStatement stm3=con.prepareStatement("update researcher set AdvisorApproved=? where uname=?");
+                        stm3.setString(1,"YES");
+                        stm3.setString(2,rname);
+                        int success=stm3.executeUpdate();
+                        approve.setVisible(false);
+                        add(approveLabel);
+                        if(success>0)
+                        {
+                            JOptionPane.showMessageDialog(null, "Succefully approved", "Success",JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.out.println(e);
+                    }
+                }
+            }
+        );
+
+        //Adding approve button or approve label based on Advisor approved or not
+        if(approvedFlag.equals("YES"))
+            add(approveLabel);
+        else
+            add(approve);
+        
+        topPanel.setBounds(0,0,700,45);
+        topPanel.setBackground(Color.DARK_GRAY);
+        topPanel.setLayout(null);
+        
+        topPanel.add(back);
+        topPanel.add(logout);
+        logout.setBounds(600,10,90,25);
         back.setBounds(10,10,90,25);
-        add(back);
+        add(topPanel);
 
         rlabel.setBounds(0,50,200,25);
         add(rlabel);
@@ -139,14 +214,14 @@ public class work extends JFrame
         
         wtable.setAutoResizeMode(0);
         wtable.setPreferredSize(new Dimension(500,300));
-        scrollPane.setBounds(100,75,300,300);
+        scrollPane.setBounds(100,85,500,300);
         add(scrollPane);
 
-        view.setBounds(300,387,100,25);
+        view.setBounds(500,397,100,25);
         add(view);
 
         setLayout(null);
-        setSize(515,500);
+        setSize(715,500);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

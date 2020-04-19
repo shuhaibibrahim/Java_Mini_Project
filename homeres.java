@@ -10,10 +10,9 @@ import java.io.File;
 import java.awt.*;
 import java.awt.Dimension;
 
-public class homeres extends Canvas 
+public class homeres extends JFrame 
 {
     JPanel topPanel=new JPanel();
-    JFrame frame=new JFrame();
 
     Connection con=null;
     JLabel mywork=new JLabel("My Works");
@@ -87,7 +86,7 @@ public class homeres extends Canvas
                 public void actionPerformed(ActionEvent ae2)
                 {
                     new updres(rname);
-                    frame.dispose();
+                    dispose();
                 }
             }
         );
@@ -98,9 +97,9 @@ public class homeres extends Canvas
         mywork.setBounds(50, 57, 100, 25);
         update.setBounds(470,57,80,25);
 
-        frame.add(scrollPane);
-        frame.add(mywork);
-        frame.add(update);
+        add(scrollPane);
+        add(mywork);
+        add(update);
         if(advisorApproved.equals("YES"))
         {
             //adding columns to rtable
@@ -130,17 +129,6 @@ public class homeres extends Canvas
                     {
                         rtable.setRowSorter(filtered);
                         filtered.setRowFilter(RowFilter.regexFilter("(?i)"+search.getText()));
-                    }
-                }
-            );
-            //Logout listener
-            logout.addActionListener(
-                new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent ae)
-                    {
-                        new frame1();
-                        frame.dispose();
                     }
                 }
             );
@@ -192,7 +180,7 @@ public class homeres extends Canvas
             rtable.setAutoResizeMode(0);
             rtable.setPreferredSize(new Dimension(500,300));
             scrollPane1.setBounds(600,87,500,200);
-            frame.add(scrollPane1);
+            add(scrollPane1);
     
             view.setBounds(1010, 299, 90, 25);
             panel.add(l);
@@ -200,26 +188,37 @@ public class homeres extends Canvas
 
             panel.setBounds(600,57,500,25);
 
-            frame.add(view);
-            frame.add(panel);
+            add(view);
+            add(panel);
             
-            frame.setSize(1250,400);//Frame Size
+            setSize(1250,400);//Frame Size
             
             topPanel.setBounds(0,0,1250,45);
             logout.setBounds(1140,10,90,25);
         }
         else
         {
-            frame.setSize(600,400);   
+            setSize(600,400);   
             topPanel.setBounds(0,0,600,45);
-            logout.setBounds(500,10,90,25);
+            logout.setBounds(490,10,90,25);
         }
+        //Logout listener
+        logout.addActionListener(
+            new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ae)
+                {
+                    new frame1();
+                    dispose();
+                }
+            }
+        );
         
         topPanel.setBackground(Color.DARK_GRAY);
-        frame.add(topPanel);
-        frame.add(logout);
-        frame.setLayout(null);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        add(topPanel);
+        add(logout);
+        setLayout(null);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }

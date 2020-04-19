@@ -2,11 +2,12 @@ import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.net.URL;
 
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.JOptionPane.*;
 
+import java.io.*;
+import java.awt.image.*;
+import javax.imageio.*;
 import java.awt.*; 
 import java.sql.*;
 
@@ -18,9 +19,26 @@ class frame1 extends JFrame implements ActionListener{
     JPasswordField pass;
     JButton login;
     boolean flag=false;
+    JLabel imglabel=new JLabel();
 
+    
+    BufferedImage img = null;
     public frame1()
-    {       
+    {
+        setBackground(Color.DARK_GRAY);
+        imglabel.setBounds(0,0,200,300);       
+        try 
+        {
+            img = ImageIO.read(new File("library.jpg"));
+        } 
+        catch (IOException e) 
+        {
+            System.out.println(e);
+        }
+        Image dimg = img.getScaledInstance(imglabel.getWidth(), imglabel.getHeight(),Image.SCALE_SMOOTH);
+        ImageIcon imgicon = new ImageIcon(dimg);
+        imglabel.setIcon(imgicon);
+
         sup=new JRadioButton("Superior");
         res=new JRadioButton("Researcher");
         ButtonGroup group1=new ButtonGroup();
@@ -32,19 +50,18 @@ class frame1 extends JFrame implements ActionListener{
         pass=new JPasswordField(20);
         login=new JButton("Login");
         login.addActionListener(this);
-        error=new JLabel();
-        try
-        {
-            BufferedImage img = ImageIO.read(new URL("C:\\Users\\Shamila\\Desktop\\library.jpg"));
-            ImageIcon icon = new ImageIcon(img);
-            JLabel imgLabel=new JLabel(icon);
-            add(imgLabel);
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
+        
         login.setBackground(Color.green);
+
+        sup.setBounds(225,50,80,25);
+        res.setBounds(305,50,100,25);
+        u.setBounds(235,85,100,25);
+        uname.setBounds(235,115,160,25);
+        p.setBounds(235,150,100,25);
+        pass.setBounds(235,180,160,25);
+        login.setBounds(265,215,100,30);
+        
+        add(imglabel);
         add(sup);
         add(res);
         add(u);
@@ -52,15 +69,6 @@ class frame1 extends JFrame implements ActionListener{
         add(p);
         add(pass);
         add(login);
-        add(error);
-
-        sup.setBounds(225,50,80,25);
-        res.setBounds(305,50,100,25);
-        u.setBounds(235,85,100,25);
-        uname.setBounds(235,115,150,25);
-        p.setBounds(235,150,100,25);
-        pass.setBounds(235,180,150,25);
-        login.setBounds(260,215,100,30);
         setLayout(null);
         setVisible(true);
         setSize(450,300);

@@ -35,10 +35,7 @@ public class updres extends JFrame
     JButton back=new JButton("Back");
     public updres(String rname)
     {
-        
-        topPanel.setBounds(0,0,600,45);
-        topPanel.setBackground(Color.DARK_GRAY);
-        add(topPanel);
+        topPanel.setLayout(null);
 
         try
         {
@@ -161,9 +158,6 @@ public class updres extends JFrame
                 }
             }
         );
-        logout.setBounds(490,10,90,25);
-        add(logout);
-
         //back button
         back.addActionListener(
             new ActionListener()
@@ -175,8 +169,16 @@ public class updres extends JFrame
                 }
             }
         );
+
+        
+        topPanel.setBounds(0,0,600,45);
+        topPanel.setBackground(Color.DARK_GRAY);
+        topPanel.add(back);
+        topPanel.add(logout);
         back.setBounds(10,10,90,25);
-        add(back);
+        logout.setBounds(490,10,90,25);
+
+        add(topPanel);
 
         wtable.setAutoResizeMode(0);
         wtable.setPreferredSize(new Dimension(500,300));
@@ -191,8 +193,9 @@ public class updres extends JFrame
         add(mywork);
 
         setLayout(null);
-        setVisible(true);
         setSize(600,400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        revalidate();
     }
 }
