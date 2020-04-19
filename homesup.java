@@ -5,12 +5,17 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.sql.*;
 import java.util.*;
 
+import java.awt.Dimension;
+
 public class homesup extends JFrame
 {
+    JPanel topPanel=new JPanel();
+
     String sname;
 
     JButton logout=new JButton("Logout");
@@ -29,6 +34,11 @@ public class homesup extends JFrame
     JTextField search=new JTextField(10);
     homesup(String supname)
     {
+
+        topPanel.setBounds(0,0,500,45);
+        topPanel.setBackground(Color.DARK_GRAY);
+        add(topPanel);
+
         sname=supname;
         try
         {
@@ -88,23 +98,26 @@ public class homesup extends JFrame
                 }
             }
         );
-        logout.setBounds(350,0,90,25);
+        logout.setBounds(390,10,90,25);
         add(logout);
 
-        scrollPane.setBounds(0,65, 300, 375);
+        rtable.setAutoResizeMode(0);
+        rtable.setPreferredSize(new Dimension(300,300));
+        scrollPane.setBounds(100,85, 300, 300);
         add(scrollPane);
 
+        panel.setAlignmentX(0);
         panel.add(l);
         panel.add(search);
-        panel.setBounds(0,30,400,25);
+        panel.setBounds(30,50,400,25);
         add(panel);
 
-        b.setBounds(300,55,150,25);
+        b.setBounds(250,397,150,25);
         add(b);
         
         
         setLayout(null);
-        setSize(480,400);
+        setSize(500,500);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

@@ -20,7 +20,7 @@ class frame1 extends JFrame implements ActionListener{
     boolean flag=false;
 
     public frame1()
-    {
+    {       
         sup=new JRadioButton("Superior");
         res=new JRadioButton("Researcher");
         ButtonGroup group1=new ButtonGroup();
@@ -53,9 +53,17 @@ class frame1 extends JFrame implements ActionListener{
         add(pass);
         add(login);
         add(error);
-        setLayout(new FlowLayout());
+
+        sup.setBounds(225,50,80,25);
+        res.setBounds(305,50,100,25);
+        u.setBounds(235,85,100,25);
+        uname.setBounds(235,115,150,25);
+        p.setBounds(235,150,100,25);
+        pass.setBounds(235,180,150,25);
+        login.setBounds(260,215,100,30);
+        setLayout(null);
         setVisible(true);
-        setSize(250,250);
+        setSize(450,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public void actionPerformed(ActionEvent ae)

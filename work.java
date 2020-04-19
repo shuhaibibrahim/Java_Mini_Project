@@ -12,7 +12,8 @@ import java.awt.*;
 
 public class work extends JFrame
 {
-    
+    JPanel topPanel=new JPanel();
+
     ResultSet rs,rs1;
     JButton view;
     Connection con=null;
@@ -31,7 +32,11 @@ public class work extends JFrame
     JLabel rlabel=new JLabel();
     public work(String rname,String supname)
     {
-        rlabel.setText("Reseacher : "+rname);
+        topPanel.setBounds(0,0,500,45);
+        topPanel.setBackground(Color.DARK_GRAY);
+        add(topPanel);
+
+        rlabel.setText("Reseacher Username : "+rname);
         try
         {
             //Connecting to database
@@ -73,7 +78,7 @@ public class work extends JFrame
                             stm2.setString(1,fname);
                             rs1=stm2.executeQuery();
                             rs1.next();
-                            fpath=rs1.getString(2);    
+                            fpath=rs1.getString(1);    
                             System.out.println(fpath);                              
                         } 
                         catch (Exception e) 
@@ -111,7 +116,7 @@ public class work extends JFrame
                 }
             }
         );
-        logout.setBounds(350,0,90,25);
+        logout.setBounds(400,10,90,25);
         add(logout);
 
         //back button
@@ -125,23 +130,23 @@ public class work extends JFrame
                 }
             }
         );
-        back.setBounds(0,0,90,25);
+        back.setBounds(10,10,90,25);
         add(back);
 
-        rlabel.setBounds(0,30,200,25);
+        rlabel.setBounds(0,50,200,25);
         add(rlabel);
         
         
         wtable.setAutoResizeMode(0);
         wtable.setPreferredSize(new Dimension(500,300));
-        scrollPane.setBounds(0,55,300,300);
+        scrollPane.setBounds(100,75,300,300);
         add(scrollPane);
 
-        view.setBounds(0,400,100,25);
+        view.setBounds(300,387,100,25);
         add(view);
 
         setLayout(null);
-        setSize(450,400);
+        setSize(515,500);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

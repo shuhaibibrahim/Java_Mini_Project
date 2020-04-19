@@ -12,6 +12,7 @@ import java.awt.Dimension;
 
 public class homeres extends Canvas 
 {
+    JPanel topPanel=new JPanel();
     JFrame frame=new JFrame();
 
     Connection con=null;
@@ -93,9 +94,9 @@ public class homeres extends Canvas
 
         wtable.setAutoResizeMode(0);
         wtable.setPreferredSize(new Dimension(500,300));
-        scrollPane.setBounds(50,50,500,200);
-        mywork.setBounds(50, 20, 100, 25);
-        update.setBounds(470,20,80,25);
+        scrollPane.setBounds(50,87,500,200);
+        mywork.setBounds(50, 57, 100, 25);
+        update.setBounds(470,57,80,25);
 
         frame.add(scrollPane);
         frame.add(mywork);
@@ -190,27 +191,32 @@ public class homeres extends Canvas
 
             rtable.setAutoResizeMode(0);
             rtable.setPreferredSize(new Dimension(500,300));
-            scrollPane1.setBounds(600,50,500,200);
+            scrollPane1.setBounds(600,87,500,200);
             frame.add(scrollPane1);
     
-            view.setBounds(1120, 50, 90, 25);
+            view.setBounds(1010, 299, 90, 25);
             panel.add(l);
             panel.add(search);
 
-            panel.setBounds(600,20,500,25);
+            panel.setBounds(600,57,500,25);
 
             frame.add(view);
             frame.add(panel);
             
             frame.setSize(1250,400);//Frame Size
             
-            logout.setBounds(300,0,90,25);
+            topPanel.setBounds(0,0,1250,45);
+            logout.setBounds(1140,10,90,25);
         }
         else
         {
             frame.setSize(600,400);   
-            logout.setBounds(500,0,90,25);
+            topPanel.setBounds(0,0,600,45);
+            logout.setBounds(500,10,90,25);
         }
+        
+        topPanel.setBackground(Color.DARK_GRAY);
+        frame.add(topPanel);
         frame.add(logout);
         frame.setLayout(null);
         frame.setVisible(true);

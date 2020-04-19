@@ -6,13 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
 
-import jdk.nashorn.internal.ir.CatchNode;
 
 import java.awt.Dimension;
 import java.awt.*;
 
 public class updres extends JFrame 
 {
+    JPanel topPanel=new JPanel();
+
     String fname,fpath,fname1="",fpath1="",lastModified;
     Connection con;
 
@@ -34,6 +35,11 @@ public class updres extends JFrame
     JButton back=new JButton("Back");
     public updres(String rname)
     {
+        
+        topPanel.setBounds(0,0,600,45);
+        topPanel.setBackground(Color.DARK_GRAY);
+        add(topPanel);
+
         try
         {
             //Connecting to database
@@ -141,7 +147,7 @@ public class updres extends JFrame
                                 JOptionPane.showMessageDialog(null,"File cannot be opened","Error",JOptionPane.ERROR_MESSAGE);
                         }
                         else
-                            JOptionPane.showMessageDialog(null,"Select a file to view","Alert",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null,"Select a file to view or edit","Alert",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
         );
@@ -155,7 +161,7 @@ public class updres extends JFrame
                 }
             }
         );
-        logout.setBounds(500,0,90,25);
+        logout.setBounds(490,10,90,25);
         add(logout);
 
         //back button
@@ -164,20 +170,20 @@ public class updres extends JFrame
             {
                 public void actionPerformed(ActionEvent e)
                 {
-                    new homesup();
+                    new homeres(rname);
                     dispose();
                 }
             }
         );
-        back.setBounds(0,0,90,25);
+        back.setBounds(10,10,90,25);
         add(back);
 
         wtable.setAutoResizeMode(0);
         wtable.setPreferredSize(new Dimension(500,300));
-        scrollPane.setBounds(50,50,500,200);
-        mywork.setBounds(50, 20, 100, 25);
-        addWork.setBounds(400,20,150,25);
-        view.setBounds(460,270,90,25);
+        scrollPane.setBounds(50,87,500,200);
+        mywork.setBounds(50, 57, 100, 25);
+        addWork.setBounds(400,57,150,25);
+        view.setBounds(420,307,130,25);
 
         add(view);
         add(scrollPane);
