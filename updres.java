@@ -10,8 +10,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
 import java.awt.*;
 
+import java.awt.image.*;
+import javax.imageio.*;
+
 public class updres extends JFrame 
 {
+    BufferedImage img=null;
+
     JPanel topPanel=new JPanel();
 
     String fname,fpath,fname1="",fpath1="",lastModified;
@@ -32,10 +37,22 @@ public class updres extends JFrame
     SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
     JButton logout=new JButton("Logout");
-    JButton back=new JButton("Back");
+    JButton back;
     public updres(String rname)
     {
         topPanel.setLayout(null);
+
+        try
+        {
+            img= ImageIO.read(new File("back.png"));
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        Image dimg = img.getScaledInstance(30, 25, Image.SCALE_SMOOTH);
+        ImageIcon backicon = new ImageIcon(dimg);
+        back=new JButton(backicon);
 
         try
         {
@@ -175,7 +192,7 @@ public class updres extends JFrame
         topPanel.setBackground(Color.DARK_GRAY);
         topPanel.add(back);
         topPanel.add(logout);
-        back.setBounds(10,10,90,25);
+        back.setBounds(10,10,30,25);
         logout.setBounds(490,10,90,25);
 
         add(topPanel);

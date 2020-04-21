@@ -94,7 +94,7 @@ class frame1 extends JFrame implements ActionListener{
             }    
             else       
             {
-                JOptionPane.showMessageDialog(null,"Select whether you are superior or reseacher","Alert",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Select whether you are superior or reseacher","Alert",JOptionPane.INFORMATION_MESSAGE);
                 flag=false;
             } 
             if(flag)
@@ -105,7 +105,7 @@ class frame1 extends JFrame implements ActionListener{
                 stm.setString(2,pwd);  
                 ResultSet rs=stm.executeQuery();          
                 if(!rs.next())
-                    JOptionPane.showMessageDialog(null,"Invalid username or password","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Invalid username or password","Error",JOptionPane.ERROR_MESSAGE);
                 else
                 {
                     if(sup.isSelected())

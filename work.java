@@ -15,7 +15,7 @@ import javax.imageio.*;
 public class work extends JFrame
 {
     
-    BufferedImage img = null;
+    BufferedImage img = null,img2=null;
 
     String approvedFlag="";
 
@@ -30,7 +30,7 @@ public class work extends JFrame
     JScrollPane scrollPane;
 
     JButton logout=new JButton("Logout");
-    JButton back=new JButton("Back");
+    JButton back;
 
     //Table selected row
     int row;
@@ -41,18 +41,23 @@ public class work extends JFrame
         try 
         {
             img = ImageIO.read(new File("tick1.png"));
+            img2= ImageIO.read(new File("back.png"));
         } 
         catch (IOException e) 
         {
             System.out.println(e);
         }
         Image dimg = img.getScaledInstance(15, 15,Image.SCALE_SMOOTH);
+        Image dimg2 = img2.getScaledInstance(30, 25, Image.SCALE_SMOOTH);
         ImageIcon imgicon = new ImageIcon(dimg);
+        ImageIcon backicon = new ImageIcon(dimg2);
 
         JPanel topPanel=new JPanel();
 
         JButton approve=new JButton("Approve Researcher");
         JLabel approveLabel=new JLabel("Approved",imgicon,JLabel.CENTER);
+
+        back=new JButton(backicon);
 
         rlabel.setText("Reseacher Username : "+rname);
         try
@@ -205,7 +210,7 @@ public class work extends JFrame
         topPanel.add(back);
         topPanel.add(logout);
         logout.setBounds(600,10,90,25);
-        back.setBounds(10,10,90,25);
+        back.setBounds(10,10,30,25);
         add(topPanel);
 
         rlabel.setBounds(0,50,200,25);
