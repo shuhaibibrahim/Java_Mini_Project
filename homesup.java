@@ -12,6 +12,8 @@ import java.util.*;
 
 import java.awt.Dimension;
 
+import connectpack.connect;
+
 public class homesup extends JFrame
 {
     JPanel topPanel=new JPanel();
@@ -44,7 +46,8 @@ public class homesup extends JFrame
         {
             //Connecting to database
             Class.forName("com.mysql.cj.jdbc.Driver");  
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/library","root","");
+            connect c=new connect();
+            Connection con = c.gConnection();
 
             PreparedStatement stm=con.prepareStatement("select name from researcher where sname=?");
             stm.setString(1,sname);
@@ -84,7 +87,7 @@ public class homesup extends JFrame
                         dispose();                
                     }
                     else
-                        JOptionPane.showMessageDialog(null,"Select a researcher!","Alert",JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(homesup.this,"Select a researcher!","Alert",JOptionPane.WARNING_MESSAGE);
                 }
             }
         );
@@ -116,6 +119,7 @@ public class homesup extends JFrame
         add(b);
         
         
+        setTitle("Research Artifact System");
         setLayout(null);
         setSize(500,500);
         setVisible(true);

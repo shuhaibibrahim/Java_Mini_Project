@@ -2,6 +2,8 @@ import java.io.File;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
+import connectpack.connect;
+
 public class update 
 {
     public update()
@@ -13,7 +15,9 @@ public class update
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");  
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/library","root","");
+            connect c=new connect();
+            Connection con = c.gConnection();
+
             Statement stm=con.createStatement();
             ResultSet rs=stm.executeQuery("select * from works");
 

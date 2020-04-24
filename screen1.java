@@ -11,7 +11,7 @@ import javax.imageio.*;
 import java.awt.*; 
 import java.sql.*;
 
-
+import connectpack.connect;
 class frame1 extends JFrame implements ActionListener{ 
     JRadioButton sup,res;
     JLabel u,p,error;
@@ -69,6 +69,8 @@ class frame1 extends JFrame implements ActionListener{
         add(p);
         add(pass);
         add(login);
+
+        setTitle("Research Artifact System");
         setLayout(null);
         setVisible(true);
         setSize(450,300);
@@ -80,7 +82,8 @@ class frame1 extends JFrame implements ActionListener{
         try
         {  
             Class.forName("com.mysql.cj.jdbc.Driver");  
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/library","root","");
+            connect c=new connect();
+            Connection con = c.gConnection();
             PreparedStatement stm=null;
             if(sup.isSelected())
             {  

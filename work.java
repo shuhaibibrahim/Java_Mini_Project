@@ -137,14 +137,14 @@ public class work extends JFrame
                             } 
                             catch (Exception e) 
                             {
-                                JOptionPane.showMessageDialog(null,"File does not exist!","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(work.this,"File does not exist!","Error",JOptionPane.ERROR_MESSAGE);
                             }
                         }
                         else
-                            JOptionPane.showMessageDialog(null,"File Connot be opened!","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(work.this,"File Connot be opened!","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else
-                        JOptionPane.showMessageDialog(null,"Select a File!","Alert",JOptionPane.WARNING_MESSAGE); 
+                        JOptionPane.showMessageDialog(work.this,"Select a File!","Alert",JOptionPane.WARNING_MESSAGE); 
                 }
             }
         );
@@ -186,7 +186,7 @@ public class work extends JFrame
                         add(approveLabel);
                         if(success>0)
                         {
-                            JOptionPane.showMessageDialog(null, "Succefully approved", "Success",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(work.this, "Succefully approved", "Success",JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                     catch(Exception e)
@@ -225,6 +225,7 @@ public class work extends JFrame
         view.setBounds(500,397,100,25);
         add(view);
 
+        setTitle("Research Artifact System");
         setLayout(null);
         setSize(715,500);
         setVisible(true);

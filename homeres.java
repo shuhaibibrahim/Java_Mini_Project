@@ -10,6 +10,8 @@ import java.io.File;
 import java.awt.*;
 import java.awt.Dimension;
 
+import connectpack.connect;
+
 public class homeres extends JFrame 
 {
     JPanel topPanel=new JPanel();
@@ -48,7 +50,8 @@ public class homeres extends JFrame
         {
             //Connecting to database
             Class.forName("com.mysql.cj.jdbc.Driver");  
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3308/library","root","");
+            connect c=new connect();
+            Connection con = c.gConnection();
 
             PreparedStatement stm=con.prepareStatement("select * from works where rname=?");
             model.addColumn("File Name");
@@ -165,14 +168,14 @@ public class homeres extends JFrame
                                 } 
                                 catch (Exception e) 
                                 {
-                                    JOptionPane.showMessageDialog(null,"File does not exist","Error",JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(homeres.this,"File does not exist","Error",JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                             else
-                                JOptionPane.showMessageDialog(null,"File cannot be opened","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(homeres.this,"File cannot be opened","Error",JOptionPane.ERROR_MESSAGE);
                         }
                         else
-                            JOptionPane.showMessageDialog(null,"Select a file to view","Alert",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(homeres.this,"Select a file to view","Alert",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             );
@@ -217,6 +220,8 @@ public class homeres extends JFrame
         topPanel.setBackground(Color.DARK_GRAY);
         add(topPanel);
         add(logout);
+        
+        setTitle("Research Artifact System");
         setLayout(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
